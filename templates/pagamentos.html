@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Pagamentos - {{ nome_cliente }}</h2>
+  <a href="{{ url_for('home') }}" class="btn btn-secondary mb-3">Voltar</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Referência</th>
+        <th>Vencimento</th>
+        <th>Valor</th>
+        <th>Status</th>
+        <th>Data Pagamento</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in pagamentos %}
+      <tr>
+        <td>{{ p[1] }}</td>
+        <td>{{ p[2] }}</td>
+        <td>R$ {{ "%.2f"|format(p[3]) }}</td>
+        <td>{{ p[4] }}</td>
+        <td>{{ p[5] if p[5] else '—' }}</td>
+        <td>
+          {% if p[4] == 'Em Dia' %}
+            <a href="{{ url_for('pagar_parcela', pagamento_id=p[0]) }}" class="btn btn-sm btn-success">Pagar</a>
+          {% elif p[4] == 'Atrasado' %}
+            <a href="{{ url_for('pagar_parcela', pagamento_id=p[0]) }}" class="btn btn-sm btn-danger">Em Atraso</a>
+            <a href="{{ url_for('gerar_ticket', pagamento_id=p[0]) }}" class="btn btn-sm btn-warning ms-1">Ticket</a>
+          {% else %}
+            <span class="text-success">✔</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

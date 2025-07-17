@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Lista de Clientes</h2>
+
+  <!-- Botão para cadastrar novo cliente -->
+  <a href="{{ url_for('novo_cliente') }}" class="btn btn-primary mb-3">Cadastrar Novo Cliente</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cliente in clientes %}
+        <tr>
+          <td>{{ cliente[0] }}</td>
+          <td>{{ cliente[1] }}</td>
+          <td>{{ cliente[2] }}</td>
+          <td>
+            <!-- Botão de "Novo Contrato" para cada cliente -->
+            <a href="{{ url_for('novo_contrato', cliente_id=cliente[0]) }}" class="btn btn-success">Novo Contrato</a>
+            
+            <!-- Botão de "Pagamentos" para cada cliente -->
+            <a href="{{ url_for('listar_pagamentos', cliente_id=cliente[0]) }}" class="btn btn-info">Ver Pagamentos</a>
+
+            <!-- Botão de "Editar" para editar o cliente -->
+            <a href="{{ url_for('editar_cliente', cliente_id=cliente[0]) }}" class="btn btn-warning">Editar</a>
+
+            <!-- Botão de "Excluir" para excluir o cliente -->
+            <a href="{{ url_for('excluir_cliente', cliente_id=cliente[0]) }}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este cliente?')">Excluir</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

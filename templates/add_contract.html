@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Novo Contrato</h2>
+
+  <a href="{{ url_for('home') }}" class="btn btn-secondary mb-3">Voltar</a>
+
+  <form method="POST">
+    <div class="mb-3">
+      <label>Valor mensal</label>
+      <input type="number" step="0.01" name="valor" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>Data de início</label>
+      <input type="date" name="inicio" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>Data final</label>
+      <input type="date" name="fim" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Salvar Contrato</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Novo Cliente</h2>
+
+  <a href="{{ url_for('home') }}" class="btn btn-secondary mb-3">Voltar</a>
+
+  <form method="POST">
+    <div class="mb-3">
+      <label>Nome</label>
+      <input type="text" name="nome" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" name="email" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label>Telefone</label>
+      <input type="text" name="telefone" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+  </form>
+{% endblock %}
